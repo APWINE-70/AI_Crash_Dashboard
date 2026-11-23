@@ -35,7 +35,7 @@
       <div class="flex items-center space-x-2 sm:space-x-4">
         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
           <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-          พร้อมใช้งาน (Online)
+          พร้อมใช้งาน (Vercel Portal)
         </span>
         <a href="https://github.com/APWINE-70/AI_Crash_Dashboard" target="_blank" class="text-slate-500 hover:text-slate-800 p-2 text-sm flex items-center space-x-1 border border-slate-200 rounded-lg hover:bg-slate-50 transition">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -106,29 +106,49 @@
       </div>
 
       <!-- Live Dashboard Frame -->
-      <div id="dashboardContainer" class="relative w-full h-[780px] bg-slate-50">
-        <!-- Loading state overlay -->
-        <div id="loadingOverlay" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
-          <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-          <p class="mt-4 text-sm font-semibold text-slate-700">กำลังเชื่อมต่อไปยัง Streamlit Cloud Engine...</p>
-          <p class="text-xs text-slate-500 mt-1">กำลังโหลดแคชข้อมูลโทรมาตร 194,726 รายการ</p>
+      <div id="dashboardContainer" class="relative w-full h-[800px] bg-slate-50">
+        <!-- Setup Guide Overlay if no URL set -->
+        <div id="setupGuide" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white z-20">
+          <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl mb-4 border border-blue-100 shadow-sm">
+            ⚡
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">เชื่อมต่อระบบประมวลผล Streamlit Cloud</h3>
+          <p class="text-sm text-slate-600 max-w-lg mb-6">
+            เนื่องจากแดชบอร์ดต้องการหน่วยประมวลผล Python แบบ 24 ชั่วโมง กรุณาคลิกปุ่มด้านล่างเพื่อ Deploy ตัวแอปบน Streamlit Community Cloud (ฟรี 100% ใน 30 วินาที) แล้วนำ URL มาใส่ในช่องด้านล่างนี้ครับ
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 w-full max-w-md justify-center mb-6">
+            <a href="https://share.streamlit.io/deploy?repository=APWINE-70/AI_Crash_Dashboard&branch=main&mainModule=app.py" target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition shadow-sm">
+              🚀 1-Click Deploy บน Streamlit Cloud
+            </a>
+          </div>
+
+          <div class="w-full max-w-md bg-slate-50 border border-slate-200 rounded-xl p-4 text-left">
+            <label class="block text-xs font-bold text-slate-700 mb-1">นำ URL ที่ได้มาวางที่นี่เพื่อแสดงผลทันที:</label>
+            <div class="flex gap-2">
+              <input id="setupUrlInput" type="text" placeholder="https://your-app.streamlit.app" class="flex-grow px-3 py-2 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <button onclick="applySetupUrl()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg text-xs font-bold hover:bg-emerald-700 transition whitespace-nowrap">
+                เชื่อมต่อ
+              </button>
+            </div>
+          </div>
         </div>
+
         <iframe
           id="dashboardFrame"
-          src="http://localhost:8501"
-          class="w-full h-full border-0"
-          onload="document.getElementById('loadingOverlay').style.display='none';"
+          src=""
+          class="w-full h-full border-0 hidden"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
       </div>
     </div>
 
-    <!-- Quick Configuration helper if deployed on Streamlit Cloud -->
+    <!-- Quick Configuration helper bar -->
     <div class="mt-4 p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 flex flex-col sm:flex-row items-center justify-between gap-3">
       <div>
-        <span class="font-bold">💡 กำหนด URL ของ Streamlit Cloud:</span>
-        <span class="text-blue-700 ml-1">เมื่อ Deploy บน Streamlit Community Cloud เรียบร้อยแล้ว สามารถนำ URL มาใส่ในช่องนี้เพื่อเชื่อมต่อทันที:</span>
+        <span class="font-bold">💡 สถานะการเชื่อมต่อ:</span>
+        <span id="connectionStatus" class="text-blue-700 ml-1">กำลังรอ URL ของ Streamlit Cloud</span>
       </div>
       <div class="flex items-center space-x-2 w-full sm:w-auto">
         <input id="customUrlInput" type="text" placeholder="https://your-app.streamlit.app" class="px-3 py-1.5 border border-blue-300 rounded-lg text-xs w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -184,25 +204,46 @@
       }
     }
 
-    function updateDashboardUrl() {
-      const input = document.getElementById('customUrlInput').value.trim();
-      if (input) {
-        const frame = document.getElementById('dashboardFrame');
-        const directLink = document.getElementById('directLink');
-        frame.src = input;
-        directLink.href = input;
-        localStorage.setItem('streamlit_dashboard_url', input);
-        document.getElementById('loadingOverlay').style.display = 'flex';
+    function setLiveUrl(url) {
+      if (!url) return;
+      const frame = document.getElementById('dashboardFrame');
+      const directLink = document.getElementById('directLink');
+      const guide = document.getElementById('setupGuide');
+      const status = document.getElementById('connectionStatus');
+
+      frame.src = url;
+      frame.classList.remove('hidden');
+      guide.classList.add('hidden');
+      directLink.href = url;
+      status.innerText = `เชื่อมต่อกับ ${url} เรียบร้อย`;
+      document.getElementById('customUrlInput').value = url;
+      localStorage.setItem('streamlit_dashboard_url', url);
+    }
+
+    function applySetupUrl() {
+      const url = document.getElementById('setupUrlInput').value.trim();
+      if (url) {
+        setLiveUrl(url);
       }
     }
 
-    // Load saved URL if available
+    function updateDashboardUrl() {
+      const input = document.getElementById('customUrlInput').value.trim();
+      if (input) {
+        setLiveUrl(input);
+      }
+    }
+
+    // Auto-check stored URL or query parameters
     window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramUrl = urlParams.get('url');
       const savedUrl = localStorage.getItem('streamlit_dashboard_url');
-      if (savedUrl) {
-        document.getElementById('customUrlInput').value = savedUrl;
-        document.getElementById('dashboardFrame').src = savedUrl;
-        document.getElementById('directLink').href = savedUrl;
+
+      if (paramUrl) {
+        setLiveUrl(paramUrl);
+      } else if (savedUrl) {
+        setLiveUrl(savedUrl);
       }
     });
   </script>
