@@ -1,0 +1,6 @@
+# Python application & data files (handled natively by Streamlit Community Cloud)
+app.py
+requirements.txt
+src/
+data/
+.streamlit/

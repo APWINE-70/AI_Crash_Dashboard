@@ -181,4 +181,21 @@ For complete task specifications and deliverables, refer to [COMPETITION_TASK_CR
 - **User Documentation**: Infographic User Manual and quick start guide.
 - **Presentation**: 15-minute slide deck with structured story (Problem $\rightarrow$ Method $\rightarrow$ Findings $\rightarrow$ Recommendations).
 
+---
+
+## 9. Cloud Deployment & Dual-Cloud Architecture Knowledge (Learned via /learn)
+
+### 9.1 Streamlit vs Vercel Serverless Architecture Conflict
+- **Root Cause**: Deploying a Streamlit repository to Vercel triggers `@vercel/python` auto-detection when `app.py` is at root, resulting in `[PYTHON_ENTRYPOINT_NOT_FOUND]` because Streamlit is not a WSGI/ASGI application.
+- **Technical Incompatibility**: Streamlit requires long-running processes with persistent WebSockets (`/_stcore/stream`), whereas Vercel is built for stateless, short-lived HTTP serverless invocations.
+
+### 9.2 The Gold-Standard Solution: Dual-Cloud Hybrid Architecture
+1. **Analytics Engine (Streamlit Community Cloud)**:
+   - Hosts `app.py` directly from GitHub (`main` branch).
+   - Manages state, persistent WebSockets, and Parquet in-memory cache.
+2. **Web Portal & Domain (Vercel)**:
+   - Hosts `index.html` as a pure static showcase with an embedded dashboard viewer.
+   - **Invariable Rule**: Always include `.vercelignore` listing `app.py`, `requirements.txt`, `src/`, `data/` so Vercel builds `index.html` as static and never triggers `@vercel/python`.
+
+
 
