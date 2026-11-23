@@ -1,0 +1,56 @@
+﻿Field_Name,Data_Type,Missing_Count,Missing_Percent,Sample_Values,Description
+Report Number,str,0,0.0,"['MCP3000000', 'MCP3000001', 'MCP3000002']",Primary Key - Unique crash incident report identifier
+Local Case Number,int64,0,0.0,"[240010000, 240010001, 240010002]",Field from original raw dataset
+Agency Name,str,0,0.0,"['Montgomery County Police', 'Rockville Police Departme', 'Gaithersburg Police Depar']",Field from original raw dataset
+ACRS Report Type,str,0,0.0,"['Injury Crash', 'Property Damage Crash', 'Fatal Crash']",Field from original raw dataset
+Crash Date/Time,str,0,0.0,"['08/24/2022 03:49:39 PM', '04/26/2022 07:18:24 PM', '03/15/2024 06:05:44 PM']",Original incident timestamp string
+Route Type,str,0,0.0,"['Maryland (State)', 'Interstate (State)', 'US (State)']",Field from original raw dataset
+Road Name,str,0,0.0,"['NEW HAMPSHIRE AVE', 'UNKNOWN ROAD', 'ROCKVILLE PIKE']",Field from original raw dataset
+Cross-Street Name,str,0,0.0,"['UNKNOWN CROSS-STREET', 'VEIRS MILL RD', 'FATHER HURLEY BLVD']",Field from original raw dataset
+Municipality,str,0,0.0,"['NONE', 'TAKOMA PARK', 'GAITHERSBURG']",Field from original raw dataset
+Related Non-Motorist,str,0,0.0,"['NONE', 'BICYCLIST', 'PEDESTRIAN']",Field from original raw dataset
+Collision Type,str,0,0.0,"['SAME DIR REAR END', 'STRAIGHT MOVEMENT ANGLE', 'SINGLE VEHICLE']",Field from original raw dataset
+Weather,str,0,0.0,"['CLEAR', 'CLOUDY', 'RAINING']",Field from original raw dataset
+Surface Condition,str,0,0.0,"['DRY', 'UNKNOWN / NOT REPORTED', 'WET']",Field from original raw dataset
+Light,str,0,0.0,"['DAYLIGHT', 'DARK NO LIGHTS', 'DUSK']",Field from original raw dataset
+Traffic Control,str,0,0.0,"['STOP SIGN', 'NO CONTROLS', 'TRAFFIC SIGNAL']",Field from original raw dataset
+Driver Substance Abuse,str,0,0.0,"['NONE DETECTED', 'UNKNOWN', 'ALCOHOL PRESENT']",Field from original raw dataset
+Non-Motorist Substance Abuse,str,184795,94.9,"['NONE DETECTED', 'ALCOHOL PRESENT', 'UNKNOWN']",Field from original raw dataset
+Person ID,str,0,0.0,"['P-100000', 'P-100001', 'P-100002']",Field from original raw dataset
+Driver At Fault,str,0,0.0,"['No', 'Yes', 'UNKNOWN']",Field from original raw dataset
+Injury Severity,str,0,0.0,"['SUSPECTED SERIOUS INJURY', 'POSSIBLE INJURY', 'SUSPECTED MINOR INJURY']",Field from original raw dataset
+Circumstance,str,87726,45.05,"['FAILED TO YIELD RIGHT OF WAY', 'FOLLOWED TOO CLOSELY', 'EXCEEDED SPEED LIMIT']",Field from original raw dataset
+Driver Distracted By,str,0,0.0,"['NOT DISTRACTED', 'EATING OR DRINKING', 'TALKING OR LISTENING TO CELLULAR PHONE']",Field from original raw dataset
+Drivers License State,str,0,0.0,"['MD', 'DC', 'VA']",Field from original raw dataset
+Vehicle ID,str,0,0.0,"['V-200000', 'V-200001', 'V-200002']",Field from original raw dataset
+Vehicle Damage Extent,str,0,0.0,"['DESTROYED', 'SUPERFICIAL', 'NO DAMAGE']",Field from original raw dataset
+Vehicle First Impact Location,str,0,0.0,"['TEN OCLOCK', 'SIX OCLOCK', 'TWO OCLOCK']",Field from original raw dataset
+Vehicle Second Impact Location,str,0,0.0,"['TEN OCLOCK', 'SIX OCLOCK', 'TWO OCLOCK']",Field from original raw dataset
+Vehicle Body Type,str,0,0.0,"['PASSENGER CAR', '(SPORT) UTILITY VEHICLE', 'TRANSIT BUS']",Field from original raw dataset
+Vehicle Movement,str,0,0.0,"['STARTING FROM LANE', 'SLOWING OR STOPPING', 'STOPPED IN TRAFFIC LANE']",Field from original raw dataset
+Vehicle Continuing Dir,str,0,0.0,"['North', 'South', 'East']",Field from original raw dataset
+Vehicle Going Dir,str,0,0.0,"['North', 'South', 'East']",Field from original raw dataset
+Speed Limit,int64,0,0.0,"[35, 55, 30]",Field from original raw dataset
+Driverless Vehicle,str,0,0.0,"['No', 'Yes']",Field from original raw dataset
+Parked Vehicle,str,0,0.0,"['No', 'Yes']",Field from original raw dataset
+Vehicle Year,int64,0,0.0,"[2021, 2002, 2004]",Field from original raw dataset
+Vehicle Make,str,0,0.0,"['TOYOTA', 'HONDA', 'FORD']",Field from original raw dataset
+Vehicle Model,str,0,0.0,"['F-150', 'RAV4', 'ACCORD']",Field from original raw dataset
+Latitude,float64,0,0.0,"[39.015035, 39.006125, 39.190211]",Field from original raw dataset
+Longitude,float64,0,0.0,"[-77.473152, -77.434829, -76.989761]",Field from original raw dataset
+Crash_Timestamp,datetime64[us],0,0.0,"[Timestamp('2022-08-24 15:49:39'), Timestamp('2022-04-26 19:18:24'), Timestamp('2024-03-15 18:05:44')]",Engineered parsed datetime timestamp
+Year,int32,0,0.0,"[2022, 2024, 2021]",Engineered temporal dimension (Year)
+Month,int32,0,0.0,"[8, 4, 3]",Engineered temporal dimension (Month)
+Month_Name,str,0,0.0,"['Aug', 'Apr', 'Mar']",Engineered temporal dimension (Month_Name)
+DayOfWeek,str,0,0.0,"['Wednesday', 'Tuesday', 'Friday']",Engineered temporal dimension (DayOfWeek)
+Hour,int32,0,0.0,"[15, 19, 18]",Engineered temporal dimension (Hour)
+Is_Weekend,bool,0,0.0,"[False, True]",Engineered boolean: True for Saturday/Sunday
+Is_Commute_Peak,bool,0,0.0,"[False, True]","Engineered boolean: True for weekday rush hours (07-09, 16-18)"
+Is_Off_Peak_Target,bool,0,0.0,"[True, False]",Engineered boolean: True for midday off-peak (10:00 - 15:59)
+Time_Period,str,0,0.0,"['Midday Off-Peak (10:00-15:59)', 'Evening Commute (16:00-19:59)', 'Night / Early Morning (20:00-05:59)']",Field from original raw dataset
+Is_Dark_Environment,bool,0,0.0,"[False, True]",Engineered boolean: True for night or dark light conditions
+Is_Severe_Crash,bool,0,0.0,"[True, False]",Engineered boolean: True for Injury or Fatal Crash
+Is_Fatal_Crash,bool,0,0.0,"[False, True]",Field from original raw dataset
+Vehicle_Year_Cleaned,float64,2336,1.2,"[2021.0, 2002.0, 2004.0]",Cleaned Vehicle Year (outliers < 1960 or > 2025 set to null)
+Vehicle_Age,float64,2336,1.2,"[1.0, 20.0, 17.0]",Calculated Vehicle Age at time of incident (Crash Year - Vehicle Year)
+Speed_Limit_Cleaned,int64,0,0.0,"[35, 55, 30]",Cleaned Speed Limit (0 mph imputed by Route Type median)
