@@ -207,8 +207,12 @@ For complete task specifications and deliverables, refer to [COMPETITION_TASK_CR
 - **Full Interactivity**: Client-side React components (Recharts / Tailwind CSS) with real-time filtering, 24x7 matrix heatmap, and CSV export.
 
 ### 10.2 Pre-Aggregated Data Pipeline Pattern
-- Run `python src/pipeline/generate_web_analytics.py` to compress 194,726 rows from Parquet into `public/data/web_analytics.json` (277 KB).
+- Run `python src/pipeline/generate_web_analytics.py` to compress 194,726 rows from Parquet into `public/data/web_analytics.json` and `app/web_analytics.json` (277 KB).
 - Next.js imports this bundle statically, achieving zero latency and 100% reliability for vocational competition evaluation.
+
+### 10.3 Vercel Ignore Matching & Plotly 7 Compatibility
+- **Plotly Express 7 Breaking Change**: `px.scatter_mapbox` was replaced with `px.scatter_map` in Plotly 7+. Use `if hasattr(px, 'scatter_map'): ... else: px.scatter_mapbox(...)` check to ensure full cross-version compatibility across Streamlit Cloud deployments.
+- **Root-anchored .vercelignore**: Always prefix root directory ignore patterns with leading slashes (e.g. `/data/`, `/app.py`) so nested folders like `public/data/` or internal app data imports are not unintentionally ignored during Vercel cloud builds.
 
 
 

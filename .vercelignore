@@ -1,6 +1,11 @@
-# Python application & data files (handled natively by Streamlit Community Cloud)
-app.py
-requirements.txt
-src/
-data/
-.streamlit/
+# Python application & big data files (handled natively by Streamlit Community Cloud)
+/app.py
+/requirements.txt
+/src/
+/data/
+/.streamlit/
+/docs/
+/AGENTS.md
+/COMPETITION_RULES_DATA_ANALYSIS.md
+/COMPETITION_TASK_CRASH_ANALYSIS.md
+/README.md

@@ -521,20 +521,36 @@ def main():
 
         if len(valid_coords) > 0:
             sample_map_df = valid_coords.sample(min(len(valid_coords), 1500), random_state=42)
-            fig_map = px.scatter_mapbox(
-                sample_map_df,
-                lat="Latitude",
-                lon="Longitude",
-                color="ACRS Report Type",
-                color_discrete_map={"Property Damage Crash": "#29B5E8", "Injury Crash": "#FFAA00", "Fatal Crash": "#FF4B4B"},
-                size="Speed_Limit_Cleaned",
-                zoom=9,
-                height=420,
-                title="Geospatial Crash Map (พิกัดจุดเกิดเหตุตัวอย่าง 1,500 จุด)",
-                hover_name="Road Name",
-                hover_data=["Collision Type", "Traffic Control", "Weather"]
-            )
-            fig_map.update_layout(mapbox_style="carto-positron", margin={"r":0,"t":40,"l":0,"b":0})
+            if hasattr(px, "scatter_map"):
+                fig_map = px.scatter_map(
+                    sample_map_df,
+                    lat="Latitude",
+                    lon="Longitude",
+                    color="ACRS Report Type",
+                    color_discrete_map={"Property Damage Crash": "#29B5E8", "Injury Crash": "#FFAA00", "Fatal Crash": "#FF4B4B"},
+                    size="Speed_Limit_Cleaned",
+                    zoom=9,
+                    height=420,
+                    title="Geospatial Crash Map (พิกัดจุดเกิดเหตุตัวอย่าง 1,500 จุด)",
+                    hover_name="Road Name",
+                    hover_data=["Collision Type", "Traffic Control", "Weather"]
+                )
+                fig_map.update_layout(map_style="open-street-map", margin={"r":0,"t":40,"l":0,"b":0})
+            else:
+                fig_map = px.scatter_mapbox(
+                    sample_map_df,
+                    lat="Latitude",
+                    lon="Longitude",
+                    color="ACRS Report Type",
+                    color_discrete_map={"Property Damage Crash": "#29B5E8", "Injury Crash": "#FFAA00", "Fatal Crash": "#FF4B4B"},
+                    size="Speed_Limit_Cleaned",
+                    zoom=9,
+                    height=420,
+                    title="Geospatial Crash Map (พิกัดจุดเกิดเหตุตัวอย่าง 1,500 จุด)",
+                    hover_name="Road Name",
+                    hover_data=["Collision Type", "Traffic Control", "Weather"]
+                )
+                fig_map.update_layout(mapbox_style="carto-positron", margin={"r":0,"t":40,"l":0,"b":0})
             st.plotly_chart(fig_map, use_container_width=True)
 
         top_road_1 = top_roads.iloc[0]["Road Name"] if not top_roads.empty else "N/A"
