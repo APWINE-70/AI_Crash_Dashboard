@@ -60,11 +60,14 @@ st.markdown(
 # Cached Optimized Data Loader
 @st.cache_data(show_spinner=False)
 def load_data():
-    parquet_path = r"C:\adisak\AI\data\processed\clean_crash_reports.parquet"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    parquet_path = os.path.join(base_dir, "data", "processed", "clean_crash_reports.parquet")
     if not os.path.exists(parquet_path):
-        # Fallback to running pipeline if missing
-        import subprocess
-        subprocess.run(["python", r"C:\adisak\AI\src\pipeline\clean_data.py"], check=True)
+        alt_path = r"C:\adisak\AI\data\processed\clean_crash_reports.parquet"
+        if os.path.exists(alt_path):
+            parquet_path = alt_path
+        else:
+            raise FileNotFoundError(f"Parquet dataset not found at {parquet_path}")
 
     cols_to_load = [
         "Report Number", "ACRS Report Type", "Injury Severity", "Crash Date/Time",
@@ -82,7 +85,12 @@ def load_data():
 
 @st.cache_data(show_spinner=False)
 def load_data_dictionary():
-    dict_path = r"C:\adisak\AI\data\processed\data_dictionary.csv"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    dict_path = os.path.join(base_dir, "data", "processed", "data_dictionary.csv")
+    if not os.path.exists(dict_path):
+        alt_path = r"C:\adisak\AI\data\processed\data_dictionary.csv"
+        if os.path.exists(alt_path):
+            dict_path = alt_path
     if os.path.exists(dict_path):
         return pd.read_csv(dict_path)
     return pd.DataFrame()

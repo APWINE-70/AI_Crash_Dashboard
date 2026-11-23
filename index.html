@@ -99,7 +99,7 @@
           <button id="fullscreenBtn" onclick="toggleFullscreen()" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition shadow-sm">
             ⛶ ขยายเต็มจอ (Fullscreen)
           </button>
-          <a id="directLink" href="https://share.streamlit.io" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition shadow-sm">
+          <a id="directLink" href="https://apwine-70-ai-crash-dashboard-app-qsdyeg.streamlit.app/" target="_blank" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition shadow-sm">
             ↗ เปิดในหน้าต่างใหม่
           </a>
         </div>
@@ -108,7 +108,7 @@
       <!-- Live Dashboard Frame -->
       <div id="dashboardContainer" class="relative w-full h-[800px] bg-slate-50">
         <!-- Setup Guide Overlay if no URL set -->
-        <div id="setupGuide" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white z-20">
+        <div id="setupGuide" class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-white z-20 hidden">
           <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl mb-4 border border-blue-100 shadow-sm">
             ⚡
           </div>
@@ -136,8 +136,8 @@
 
         <iframe
           id="dashboardFrame"
-          src=""
-          class="w-full h-full border-0 hidden"
+          src="https://apwine-70-ai-crash-dashboard-app-qsdyeg.streamlit.app/?embed=true"
+          class="w-full h-full border-0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen>
         </iframe>
@@ -236,6 +236,7 @@
 
     // Auto-check stored URL or query parameters
     window.addEventListener('DOMContentLoaded', () => {
+      const defaultUrl = 'https://apwine-70-ai-crash-dashboard-app-qsdyeg.streamlit.app/?embed=true';
       const urlParams = new URLSearchParams(window.location.search);
       const paramUrl = urlParams.get('url');
       const savedUrl = localStorage.getItem('streamlit_dashboard_url');
@@ -244,6 +245,8 @@
         setLiveUrl(paramUrl);
       } else if (savedUrl) {
         setLiveUrl(savedUrl);
+      } else {
+        setLiveUrl(defaultUrl);
       }
     });
   </script>
