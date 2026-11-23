@@ -154,3 +154,31 @@ For full regulatory specifications and scoring rubrics, refer to [COMPETITION_RU
 - **Response Latency**: Fast initial page load / TTI and sub-second interaction latency for filters.
 - **Deployment Resilience**: Online web dashboard as primary target, accompanied by offline fallback scripts/Docker.
 
+---
+
+## 8. Competition Task & Primary Dataset Scope (1_crash_reports.csv)
+
+For complete task specifications and deliverables, refer to [COMPETITION_TASK_CRASH_ANALYSIS.md](COMPETITION_TASK_CRASH_ANALYSIS.md).
+
+### 8.1 Dataset Profile (`1_crash_reports.csv`)
+- **Records**: 194,726 rows | **Fields**: 39 columns
+- **Data Domain**: Road traffic crash reports spanning Temporal (`Crash Date/Time`), Geospatial (`Latitude`, `Longitude`, `Road Name`), Causality (`Weather`, `Driver Distracted By`, `Collision Type`), and Severity (`ACRS Report Type`, `Injury Severity`).
+- **Data Preprocessing Invariants**:
+  - **Missing Values**: Impute behavioral fields (`Driver Substance Abuse`, `Driver At Fault`) with appropriate domain category (e.g. `'UNKNOWN'`). Manage missing in `Route Type`, `Road Name`, `Cross-Street Name`, `Weather`, `Surface Condition`, `Traffic Control`.
+  - **Outliers**: Handle invalid `Vehicle Year` (e.g. 0, 9999) and uncalibrated `Speed Limit` (0 mph/kph).
+  - **Data Dictionary**: Document field definitions, transformed data types, domain units, and sample values.
+
+### 8.2 Three Core Analytical Questions (Insight Targets)
+1. **Driver Distraction & Severity**: How does `Driver Distracted By` correlate with accident severity (`Injury Crash`, `Fatal Crash`)?
+   - *Target*: Rank high-risk behaviors causing highest injuries and fatalities.
+2. **Environmental & Nighttime Impact**: How do `Weather & Surface Condition` during nighttime (`Dark`) impact `Collision Type` and severity?
+   - *Target*: Segment accidents with limited visibility to isolate environmental risk.
+3. **Off-Peak Geographic Hotspots**: Which locations (`Road Name` / `Municipality`) experience high crash density outside peak hours (10:00 AM – 4:00 PM), and how does `Traffic Control` correlate with crash frequency?
+   - *Target*: Identify non-rush hour black spots for traffic control and signage optimization.
+
+### 8.3 Deliverables Alignment
+- **Web Dashboard**: Interactive Streamlit app providing overview KPIs, temporal filters, interactive heatmaps/charts, and tabular exploration.
+- **User Documentation**: Infographic User Manual and quick start guide.
+- **Presentation**: 15-minute slide deck with structured story (Problem $\rightarrow$ Method $\rightarrow$ Findings $\rightarrow$ Recommendations).
+
+
