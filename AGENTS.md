@@ -197,5 +197,19 @@ For complete task specifications and deliverables, refer to [COMPETITION_TASK_CR
    - Hosts `index.html` as a pure static showcase with an embedded dashboard viewer.
    - **Invariable Rule**: Always include `.vercelignore` listing `app.py`, `requirements.txt`, `src/`, `data/` so Vercel builds `index.html` as static and never triggers `@vercel/python`.
 
+---
+
+## 10. Native Next.js / React Web Dashboard Architecture (Learned via /learn)
+
+### 10.1 Why Native Next.js Replaces Streamlit on Vercel
+- **Zero Server Overhead**: Eliminates Python serverless cold starts, WebSocket disconnects, and iframe cross-origin latency.
+- **Instant CDN Performance**: First Load JS is only ~223 KB, pre-rendered statically with sub-second TTI worldwide.
+- **Full Interactivity**: Client-side React components (Recharts / Tailwind CSS) with real-time filtering, 24x7 matrix heatmap, and CSV export.
+
+### 10.2 Pre-Aggregated Data Pipeline Pattern
+- Run `python src/pipeline/generate_web_analytics.py` to compress 194,726 rows from Parquet into `public/data/web_analytics.json` (277 KB).
+- Next.js imports this bundle statically, achieving zero latency and 100% reliability for vocational competition evaluation.
+
+
 
 
