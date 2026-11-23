@@ -127,3 +127,30 @@ Every incident event in the system must conform to the following schema:
 2. **Atomic Commits**: Group related changes logically.
 3. **Preserve User Intent**: Do not remove existing components or filters without explicit instruction.
 4. **Update Knowledge**: When adding new modules, conventions, or troubleshooting fixes, update `AGENTS.md` to ensure future agents inherit the context.
+
+---
+
+## 7. Data Analysis & Dashboard Quality Benchmark (Vocational Competition Standard 2568 - 2572)
+
+For full regulatory specifications and scoring rubrics, refer to [COMPETITION_RULES_DATA_ANALYSIS.md](COMPETITION_RULES_DATA_ANALYSIS.md). Any data pipelines, analytic scripts, or dashboard features developed in this workspace should adhere to the following gold-standard rubric criteria:
+
+### 7.1 Data Preparation & Integrity (18 pts benchmark)
+- **Completeness**: Validate primary keys, schema types, domain units (`°C`, `THB`), missing key fields $\le 1\%$, deduplication on primary/business keys, referential integrity (FK match rate $\ge 99\%$).
+- **Cleaning & Outliers**: Explicit missing strategies (drop vs. impute with domain rationale), outlier detection (IQR / Z-score) with before-and-after reconciliation notes.
+- **Reproducibility**: Maintain a clear Data Dictionary (field name, description, type, domain, examples) and deterministic execution pipelines.
+
+### 7.2 Exploratory Data Analysis & Insights (18 pts benchmark)
+- **Statistical Rigor**: Report central tendency and dispersion (`mean`, `median`, `std`, `IQR`, `min-max`).
+- **Trends & Correlation**: Provide time series roll-ups, correlation heatmaps, cross-group comparisons (bar/box/violin), and faceted interactions.
+- **Actionable Insights**: Provide 3–5 bullet points highlighting concrete decisions ("What $\rightarrow$ So What $\rightarrow$ Now What") backed by metrics ($\Delta\%$, rates, confidence/std).
+
+### 7.3 Visualization & Dashboard Usability (26 pts benchmark)
+- **Hierarchy**: Strict `Overview (KPIs) → Drill-down Details` flow.
+- **Chart Selection**: Pick the right chart for the data type (categorical $\rightarrow$ bar; distribution $\rightarrow$ histogram/box; correlation $\rightarrow$ scatter + trend; time $\rightarrow$ line/area). Avoid misleading truncated axes.
+- **Interactive Controls**: Filters, search bars, sortable tables, and export options (CSV/Excel/PDF).
+- **Graceful State Handling**: Never leave blank empty screens upon filtering; provide descriptive empty-state messaging and quick reset actions.
+
+### 7.4 Performance & Deployment (8 pts benchmark)
+- **Response Latency**: Fast initial page load / TTI and sub-second interaction latency for filters.
+- **Deployment Resilience**: Online web dashboard as primary target, accompanied by offline fallback scripts/Docker.
+
