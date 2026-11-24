@@ -214,6 +214,40 @@ For complete task specifications and deliverables, refer to [COMPETITION_TASK_CR
 - **Plotly Express 7 Breaking Change**: `px.scatter_mapbox` was replaced with `px.scatter_map` in Plotly 7+. Use `if hasattr(px, 'scatter_map'): ... else: px.scatter_mapbox(...)` check to ensure full cross-version compatibility across Streamlit Cloud deployments.
 - **Root-anchored .vercelignore**: Always prefix root directory ignore patterns with leading slashes (e.g. `/data/`, `/app.py`) so nested folders like `public/data/` or internal app data imports are not unintentionally ignored during Vercel cloud builds.
 
+---
+
+## 11. Connected Repositories & External Workspaces Registry
+
+### 11.1 MRG_pro_Seriously Workspace
+- **Local Directory**: `C:\Users\Surface\Documents\MrG`
+- **Remote Origin**: `https://github.com/APWINE-70/MRG_pro_Seriously.git`
+- **Default Branch**: `main`
+- **Committer / Identity**: Wine (`winekae172@gmail.com`)
+- **Credential Helper**: Windows Credential Manager (`manager`)
+- **Dedicated Knowledge Base**: `C:\Users\Surface\Documents\MrG\AGENTS.md`
+
+### 11.2 Empty Remote Git Binding Runbook
+When linking a brand new / empty remote GitHub repository to a local directory:
+1. **Binding Command**:
+   ```powershell
+   cd C:\Users\Surface\Documents\MrG
+   git clone https://github.com/APWINE-70/MRG_pro_Seriously.git .
+   ```
+   *Note: Git outputs `warning: You appear to have cloned an empty repository.`, which sets `origin` and tracks `refs/remotes/origin/*` automatically while pointing to `branch main` without requiring manual `git remote add`.*
+2. **First Commit & Push Tracking**:
+   Because the remote has no commits yet, the initial push must configure upstream tracking:
+   ```powershell
+   git add .
+   git commit -m "chore: initial repository structure and AGENTS.md"
+   git push -u origin main
+   ```
+3. **Workspace Initialization Standards**:
+   Every new repository must immediately have:
+   - `AGENTS.md`: Operational memory, repository runbook, and conventions.
+   - `README.md`: Project documentation and quick start.
+   - `.gitignore`: Preventing accidental commits of virtual environments, secrets, or OS caches.
+
+
 
 
 
